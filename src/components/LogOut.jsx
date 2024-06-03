@@ -22,7 +22,7 @@ function Logout() {
 
   return (
     <div className="container">
-      <h2>Logout</h2>
+  
       <Button variant="danger" onClick={handleLogout}>
         Logout
       </Button>

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import {
   collection,
   query,
-  where,
+  // where,
   orderBy,
   onSnapshot,
   addDoc,
@@ -19,11 +19,12 @@ function ChatRoom({ currentUser }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log(currentUser);
     if (!currentUser) return;
 
     const q = query(
       collection(db, "messages"),
-      where("senderId", "==", currentUser.uid),
+      // where("senderId", "==", currentUser.uid),
       orderBy("timestamp", "desc")
     );
     const unsubscribe = onSnapshot(
