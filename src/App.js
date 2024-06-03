@@ -5,6 +5,7 @@ import Chat from "./components/Chat";
 import { auth } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Login from "./components/Login";
+import LogOut from './components/LogOut';
 import SignUp from "./components/SignUp";
 
 
@@ -37,7 +38,8 @@ const redirectToChat = () => {
             path="/"
             element={<SignUp redirectToLogin={redirectToLogin} />}
           />
-          
+                  <Route path="/logout" element={<LogOut />} />
+
         </Routes>
       </Router>
       {/* //Logout button */}

@@ -2,10 +2,13 @@ import React from "react";
 import { Button } from "react-bootstrap";
 
 import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 import { auth } from "../firebase";
 
 function Logout() {
+  const navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
       await signOut(auth);

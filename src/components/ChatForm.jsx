@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React, { useState } from "react";
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form } from "react-bootstrap";
 
 function ChatForm({ onSendMessage }) {
   const [message, setMessage] = useState("");
@@ -22,21 +22,34 @@ function ChatForm({ onSendMessage }) {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  };
+
   return (
-    <Form onSubmit={handleSubmit}>
-    <Form.Control
-      type="text"
-      value={message}
-      onChange={handleChange}
-      placeholder="Type your message..."
-    />
-    
-    <Button variant="primary" type="submit">
-      Send
-    </Button>
-  </Form>
+    <Form onSubmit={handleSubmit} className="chat-form">
+      <Form.Group>
+        <Form.Control
+          type="text"
+          value={message}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress}
+          placeholder="Type your message..."
+        />
+      </Form.Group>
+
+      <Button
+        variant="primary"
+        type="submit"
+        disabled={!message.trim()}
+        className="send-button"
+      >
+        Send
+      </Button>
+    </Form>
   );
 }
 
 export default ChatForm;
-

@@ -5,6 +5,8 @@ import { Container, Row, Col, Alert } from 'react-bootstrap';
 import 'firebase/database';
 // import ChatForm from './ChatForm';
 import ChatRoom from './ChatRoom';
+import Header from './Header';
+
 
 function Chat() {
   const [user] = useAuthState(auth);
@@ -15,6 +17,7 @@ function Chat() {
       <Col xs={12} md={8}>
         {user ? (
           <>
+          <Header user={user} />
             <ChatRoom  currentUser={user} />
          
           </>

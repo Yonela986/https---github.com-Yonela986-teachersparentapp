@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import ChatForm from "./ChatForm";
-import { Container } from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 
 function ChatRoom({ currentUser }) {
   const [messages, setMessages] = useState([]);
@@ -69,15 +69,22 @@ function ChatRoom({ currentUser }) {
   if (error) return <p>Error: {error.message || JSON.stringify(error)}</p>;
 
   return (
-    <Container>
-      <h1>Chats</h1>
-      <div>
-        {messages.map((message) => (
-          <div key={message.id}>{message.text}</div>
-        ))}
-      </div>
-      <ChatForm currentUser={currentUser} onSendMessage={sendMessage} />
-    </Container>
+    <Container className="chat-room">
+    <h1>Chat Room</h1>
+    <div className="messages-container">
+      {messages.map((message) => (
+        <Card key={message.id} className="message-card">
+          <Card.Body>
+            <Card.Text>{message.text}</Card.Text>
+            <Card.Subtitle className="message-timestamp">
+              {message.timestamp?.toDate().toLocaleString()}
+            </Card.Subtitle>
+          </Card.Body>
+        </Card>
+      ))}
+    </div>
+    <ChatForm onSendMessage={sendMessage} />
+  </Container>
   );
 }
 

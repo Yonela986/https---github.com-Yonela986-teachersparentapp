@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { useNavigate } from 'react-router-dom';
 
 import { auth } from '../firebase';
 
@@ -9,14 +9,21 @@ function Login({ redirectToChat }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      setError('Please enter both email and password.');
+      return;
+    }
+ 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       // User logged in successfully
       console.log('User logged in:', userCredential.user);
-      redirectToChat();
+      // redirectToChat();
+      navigate('/chat');
     } catch (error) {
       if (error.code === 'auth/invalid-credential') {
         setError('Invalid email or password. Please try again.');
